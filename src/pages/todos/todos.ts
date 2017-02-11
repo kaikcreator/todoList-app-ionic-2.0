@@ -31,6 +31,8 @@ export class TodosPage {
       new TodoModel("this is an element", false, true),
       new TodoModel("this is an element"),
       new TodoModel("this is an element"),
+      new TodoModel("this is an element"),
+      new TodoModel("this is an element"),
     ];
   }
 
@@ -47,6 +49,10 @@ export class TodosPage {
 
   toogleTodo(todo:TodoModel){
     todo.isDone = ! todo.isDone;
+  }
+
+  showAddTodo(){
+    console.log("hi!!!!");
   }
 
 }
