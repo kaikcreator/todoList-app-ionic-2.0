@@ -45,4 +45,8 @@ export class TodosPage {
 
   }
 
+  toogleTodo(todo:TodoModel){
+    todo.isDone = ! todo.isDone;
+  }
+
 }
