@@ -19,6 +19,23 @@
 </ion-header>
 
 
-<ion-content padding>
+<ion-content>
+
+  <ion-list no-lines>
+    <ion-item>
+      <ion-input placeholder="Task description" clearInput
+      [(ngModel)]="model.description"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Is important</ion-label>
+      <ion-checkbox color="dark" [(ngModel)]="model.isImportant"></ion-checkbox>
+    </ion-item>
+
+    <div>
+      <button ion-button block (click)="submit()">Add</button>
+    </div>
+
+  </ion-list>
 
 </ion-content>

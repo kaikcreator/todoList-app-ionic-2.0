@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { ViewController, NavParams } from 'ionic-angular';
 
+import { TodoModel } from '../../shared/todo-model';
+
 /*
   Generated class for the AddTaskModal page.
 
@@ -13,6 +15,8 @@ import { ViewController, NavParams } from 'ionic-angular';
 })
 export class AddTaskModalPage {
 
+  public model = new TodoModel('');
+
   constructor(public viewCtrl: ViewController, public navParams: NavParams) {}
 
   ionViewDidLoad() {
@@ -21,6 +25,10 @@ export class AddTaskModalPage {
 
   dismiss(){
     this.viewCtrl.dismiss();
+  }
+
+  submit(){
+    console.log(this.model);
   }
 
 }
