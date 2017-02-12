@@ -21,7 +21,7 @@
 
 <ion-content>
 
-  <ion-list no-lines>
+  <ion-list no-lines class="container">
     <ion-item>
       <ion-input placeholder="Task description" clearInput
       [(ngModel)]="model.description"></ion-input>
@@ -32,7 +32,7 @@
       <ion-checkbox color="dark" [(ngModel)]="model.isImportant"></ion-checkbox>
     </ion-item>
 
-    <div>
+    <div class="submit-button">
       <button ion-button block (click)="submit()">Add</button>
     </div>
 
