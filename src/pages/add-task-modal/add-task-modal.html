@@ -40,7 +40,8 @@
       </ion-item>
 
       <div class="submit-button">
-        <button ion-button block type="submit">Add</button>
+        <button ion-button block type="submit"
+        [disabled]="!descriptionState.valid">Add</button>
       </div>
 
     </form>

@@ -27,6 +27,18 @@ page-add-task-modal {
                 color: color($colors, danger);
                 margin-top: -40px;
                 margin-bottom: -5px;
+
+                transition-property: opacity, visibility;
+                transition-duration: 0.3s;
+
+                &[hidden]{
+                    display: block !important;
+                    opacity: 0;
+                    visibility: hidden;
+                    transition-property: opacity, visibility;
+                    transition-duration: 0.3s;
+                    transition-delay: 0.3s;
+                }
             }
         }
     }
