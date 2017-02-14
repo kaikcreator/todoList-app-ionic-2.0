@@ -1,5 +1,9 @@
 page-add-task-modal {
 
+    ion-list{
+        height: 100%;
+    }
+    
     .container{
         height: 100%;
         display: flex;
@@ -15,6 +19,15 @@ page-add-task-modal {
 
         .submit-button{
             width:100%;
+        }
+
+        ion-item{
+            &.item-md-danger, &.item-ios-danger, &.item-wp-danger{
+                background-color:transparent;
+                color: color($colors, danger);
+                margin-top: -40px;
+                margin-bottom: -5px;
+            }
         }
     }
 

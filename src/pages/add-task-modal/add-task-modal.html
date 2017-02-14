@@ -26,7 +26,12 @@
 
       <ion-item>
         <ion-input placeholder="Task description" clearInput
-        [(ngModel)]="model.description" name="description" required></ion-input>
+        [(ngModel)]="model.description" name="description" required
+        #descriptionState="ngModel"></ion-input>
+      </ion-item>
+
+      <ion-item color="danger" [hidden]="descriptionState.valid || descriptionState.untouched">
+        Description is required
       </ion-item>
 
       <ion-item>
