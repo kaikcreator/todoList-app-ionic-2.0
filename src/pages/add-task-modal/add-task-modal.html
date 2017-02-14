@@ -21,21 +21,24 @@
 
 <ion-content>
 
-  <ion-list no-lines class="container">
-    <ion-item>
-      <ion-input placeholder="Task description" clearInput
-      [(ngModel)]="model.description"></ion-input>
-    </ion-item>
+  <ion-list no-lines>
+    <form class="container" (ngSubmit)="submit()">
 
-    <ion-item>
-      <ion-label>Is important</ion-label>
-      <ion-checkbox color="dark" [(ngModel)]="model.isImportant"></ion-checkbox>
-    </ion-item>
+      <ion-item>
+        <ion-input placeholder="Task description" clearInput
+        [(ngModel)]="model.description" name="description" required></ion-input>
+      </ion-item>
 
-    <div class="submit-button">
-      <button ion-button block (click)="submit()">Add</button>
-    </div>
+      <ion-item>
+        <ion-label>Is important</ion-label>
+        <ion-checkbox color="dark" [(ngModel)]="model.isImportant" name="isImportant"></ion-checkbox>
+      </ion-item>
 
+      <div class="submit-button">
+        <button ion-button block type="submit">Add</button>
+      </div>
+
+    </form>
   </ion-list>
 
 </ion-content>
