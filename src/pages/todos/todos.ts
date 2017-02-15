@@ -38,6 +38,10 @@ export class TodosPage {
     this.todoService.toogleTodo(todo);
   }
 
+  removeTodo(todo:TodoModel){
+    this.todoService.removeTodo(todo);
+  }
+
   showAddTodo(){
     let modal = this.modalCtrl.create(AddTaskModalPage);
     modal.present();

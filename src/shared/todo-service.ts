@@ -39,6 +39,13 @@ export class TodoService {
     todo.isDone = ! todo.isDone;
   }
 
+  removeTodo(todo:TodoModel){
+    const index = this.todos.indexOf(todo);
+    this.todos = [
+      ...this.todos.slice(0, index),
+      ...this.todos.slice(index+1)];
+  }
+
   addTodo(todo:TodoModel){
     this.todos.push(todo);
   }  

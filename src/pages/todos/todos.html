@@ -15,10 +15,25 @@
 
 <ion-content padding>
   <ion-list>
-    <ion-item *ngFor="let todo of todoService.todos" [ngStyle]="setTodoStyles(todo)">
-      <ion-label>{{todo.description}}</ion-label>
-      <ion-checkbox color="dark" [checked]="todo.isDone" (click)="toogleTodo(todo)"></ion-checkbox>
-    </ion-item>
+    <ion-item-sliding *ngFor="let todo of todoService.todos">
+
+      <ion-item [ngStyle]="setTodoStyles(todo)">
+        <ion-label>{{todo.description}}</ion-label>
+        <ion-checkbox color="dark" [checked]="todo.isDone" (click)="toogleTodo(todo)"></ion-checkbox>
+      </ion-item>
+
+      <ion-item-options side="right">
+        <button ion-button color="dark">
+          <ion-icon name="create"></ion-icon>
+          Edit
+        </button>
+        <button ion-button color="danger" (click)="removeTodo(todo)">
+          <ion-icon name="remove-circle"></ion-icon>
+          Remove
+          </button>
+      </ion-item-options>
+
+    </ion-item-sliding>
   </ion-list>
 </ion-content>
 
