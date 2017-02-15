@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, NavParams, ModalController } from 'ionic-angular';
 
 import { TodoModel } from '../../shared/todo-model'; 
+import { TodoService } from '../../shared/todo-service';
 import { AddTaskModalPage } from '../add-task-modal/add-task-modal';
 
 /*
@@ -16,44 +17,25 @@ import { AddTaskModalPage } from '../add-task-modal/add-task-modal';
 })
 export class TodosPage {
 
-  public todos: TodoModel[];
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public modalCtrl: ModalController) {}
+  constructor(
+    public navCtrl: NavController, 
+    public navParams: NavParams, 
+    public modalCtrl: ModalController,
+    public todoService: TodoService) {}
 
-  ionViewDidLoad() {
-    this.todos = [
-      new TodoModel("this is an element"),
-      new TodoModel("this is an element"),
-      new TodoModel("this is an element"),
-      new TodoModel("this is an element"),
-      new TodoModel("this is an element"),
-      new TodoModel("this is an element", true),
-      new TodoModel("this is an element"),
-      new TodoModel("this is an element", false, true),
-      new TodoModel("this is an element"),
-      new TodoModel("this is an element"),
-      new TodoModel("this is an element"),
-      new TodoModel("this is an element"),
-    ];
-  }
+  ionViewDidLoad() {}
 
   setTodoStyles(item:TodoModel){
-
     let styles = {
       'text-decoration': item.isDone ? 'line-through' : 'none',
       'font-weight': item.isImportant ? '600' : 'normal'
     };
-
     return styles;
-
   }
 
   toogleTodo(todo:TodoModel){
-    todo.isDone = ! todo.isDone;
-  }
-
-  addTodo(todo:TodoModel){
-    this.todos.push(todo);
+    this.todoService.toogleTodo(todo);
   }
 
   showAddTodo(){
@@ -62,7 +44,7 @@ export class TodosPage {
 
     modal.onDidDismiss(data => {
       if(data){
-        this.addTodo(data);
+        this.todoService.addTodo(data);
       }
     });
   }

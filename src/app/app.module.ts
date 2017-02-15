@@ -3,6 +3,7 @@ import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
 import { TodosPage } from '../pages/todos/todos';
 import { AddTaskModalPage } from '../pages/add-task-modal/add-task-modal';
+import { TodoService } from '../shared/todo-service';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,9 @@ import { AddTaskModalPage } from '../pages/add-task-modal/add-task-modal';
     TodosPage,
     AddTaskModalPage
   ],
-  providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}]
+  providers: [
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    TodoService
+    ]
 })
 export class AppModule {}

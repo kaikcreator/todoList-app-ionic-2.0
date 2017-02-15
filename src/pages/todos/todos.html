@@ -15,7 +15,7 @@
 
 <ion-content padding>
   <ion-list>
-    <ion-item *ngFor="let todo of todos" [ngStyle]="setTodoStyles(todo)">
+    <ion-item *ngFor="let todo of todoService.todos" [ngStyle]="setTodoStyles(todo)">
       <ion-label>{{todo.description}}</ion-label>
       <ion-checkbox color="dark" [checked]="todo.isDone" (click)="toogleTodo(todo)"></ion-checkbox>
     </ion-item>
