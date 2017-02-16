@@ -16,10 +16,14 @@ import { TodoModel } from '../../shared/todo-model';
 export class AddTaskModalPage {
 
   public model = new TodoModel('');
+  public title:string = "Add new task";
+  public buttonText:string = "ADD";
 
   constructor(public viewCtrl: ViewController, public navParams: NavParams) {
     if(this.navParams.get('todo')){
-      this.model = this.navParams.get('todo');
+      this.model = TodoModel.clone(this.navParams.get('todo'));
+      this.title = "Edit task";
+      this.buttonText = "Save changes";
     }
   }
 
