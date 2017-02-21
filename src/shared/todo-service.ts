@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
-import { Platform } from 'ionic-angular';
 
 import { TodoModel } from './todo-model';
 
@@ -15,7 +14,7 @@ export class TodoService {
 
   private todos: TodoModel[];
 
-  constructor(public http: Http, private platform: Platform) {
+  constructor(public http: Http) {
     this.getTodos();
   }
 
@@ -37,18 +36,15 @@ export class TodoService {
   }
 
   toogleTodo(todo:TodoModel){
-    setTimeout(()=>{
-      let isDone = !todo.isDone;
-      const todoIndex = this.todos.indexOf(todo);
-      let updatedTodo = new TodoModel(todo.description, todo.isImportant, isDone);
-      
-      this.todos = [
-        ...this.todos.slice(0,todoIndex),
-        updatedTodo,
-        ...this.todos.slice(todoIndex+1)
-      ];
+    let isDone = !todo.isDone;
+    const todoIndex = this.todos.indexOf(todo);
+    let updatedTodo = new TodoModel(todo.description, todo.isImportant, isDone);
 
-    }, this.platform.is('ios') ? 0 : 300);
+    this.todos = [
+      ...this.todos.slice(0,todoIndex),
+      updatedTodo,
+      ...this.todos.slice(todoIndex+1)
+    ];
   }
 
   removeTodo(todo:TodoModel){
