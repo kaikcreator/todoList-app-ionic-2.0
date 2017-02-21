@@ -8,8 +8,7 @@ import { TodoModel } from '../shared/todo-model';
   Angular 2 Pipes.
 */
 @Pipe({
-  name: 'doneTodosPipe',
-  pure: false
+  name: 'doneTodosPipe'
 })
 @Injectable()
 export class DoneTodosPipe {
@@ -17,6 +16,7 @@ export class DoneTodosPipe {
     Takes a value and makes it lowercase.
    */
   transform(todos: TodoModel[]) {
+    console.log("dones");
     return todos.filter(todo => todo.isDone);
   }
 }
