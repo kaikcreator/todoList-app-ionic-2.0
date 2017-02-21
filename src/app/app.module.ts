@@ -5,13 +5,15 @@ import { TodosPage } from '../pages/todos/todos';
 import { AddTaskModalPage } from '../pages/add-task-modal/add-task-modal';
 import { TodoService } from '../shared/todo-service';
 import { PrioritizedTodosPipe } from '../pipes/prioritized-todos-pipe';
+import { DoneTodosPipe } from '../pipes/done-todos-pipe';
 
 @NgModule({
   declarations: [
     MyApp,
     TodosPage,
     AddTaskModalPage,
-    PrioritizedTodosPipe
+    PrioritizedTodosPipe,
+    DoneTodosPipe
   ],
   imports: [
     IonicModule.forRoot(MyApp)
