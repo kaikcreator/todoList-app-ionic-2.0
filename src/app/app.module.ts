@@ -5,6 +5,7 @@ import { TodosPage } from '../pages/todos/todos';
 import { ListsPage } from '../pages/lists/lists';
 import { AddTaskModalPage } from '../pages/add-task-modal/add-task-modal';
 import { TodoService } from '../shared/todo-service';
+import { ListsService } from '../shared/lists-service';
 import { PrioritizedTodosPipe } from '../pipes/prioritized-todos-pipe';
 import { DoneTodosPipe } from '../pipes/done-todos-pipe';
 
@@ -29,7 +30,8 @@ import { DoneTodosPipe } from '../pipes/done-todos-pipe';
   ],
   providers: [
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    TodoService
+    TodoService,
+    ListsService
     ]
 })
 export class AppModule {}

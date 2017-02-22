@@ -15,9 +15,7 @@
 
 <ion-content padding>
   <ion-list>
-    <ion-item (click)="goToList()">My first list</ion-item>
-    <ion-item (click)="goToList()">My second list</ion-item>
-    <ion-item (click)="goToList()">My third list</ion-item>
+    <ion-item *ngFor="let list of listsService.lists" (click)="goToList()">{{list.name}}</ion-item>
   </ion-list>
 
 </ion-content>
