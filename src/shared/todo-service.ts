@@ -15,24 +15,20 @@ export class TodoService {
   private todos: TodoModel[];
 
   constructor(public http: Http) {
-    this.getTodos();
+
   }
 
-  getTodos(){
-    this.todos = [
-      new TodoModel("this is an element"),
-      new TodoModel("this is an element"),
-      new TodoModel("this is an element"),
-      new TodoModel("this is an element"),
-      new TodoModel("this is an element"),
-      new TodoModel("this is an element", true),
-      new TodoModel("this is an element"),
-      new TodoModel("this is an element", false, true),
-      new TodoModel("this is an element"),
-      new TodoModel("this is an element"),
-      new TodoModel("this is an element"),
-      new TodoModel("this is an element"),
-    ];
+  public loadFromList(id:number){
+    if(id < 3){
+      this.todos = [
+        new TodoModel("this is an element", true),
+        new TodoModel("this is an element"),
+        new TodoModel("this is an element", false, true),
+      ];
+    }else{
+      this.todos = [];
+    }
+
   }
 
   toogleTodo(todo:TodoModel){

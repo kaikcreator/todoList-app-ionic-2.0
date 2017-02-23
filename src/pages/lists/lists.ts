@@ -3,6 +3,7 @@ import { NavController, NavParams, AlertController } from 'ionic-angular';
 
 import { TodosPage } from '../todos/todos';
 import { ListsService } from '../../shared/lists-service';
+import { ListModel } from '../../shared/list-model';
 
 /*
   Generated class for the Lists page.
@@ -22,8 +23,8 @@ export class ListsPage {
     console.log('ionViewDidLoad ListsPage');
   }
 
-  goToList(){
-    this.navCtrl.push(TodosPage);
+  goToList(list:ListModel){
+    this.navCtrl.push(TodosPage, {list});
   }
 
   addNewList(name:string){

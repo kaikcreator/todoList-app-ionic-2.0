@@ -8,6 +8,14 @@ page-todos {
     }
 
     ion-list{
+
+        .no-todos{
+            color: color($colors, light);
+            font-style: italic;
+            margin-top: 50px;
+            text-align: center;
+            font-size: 1.3em;
+        }
         .item-block .item-inner{
             border: none !important;
         }

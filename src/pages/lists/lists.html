@@ -15,7 +15,7 @@
 
 <ion-content padding>
   <ion-list>
-    <ion-item *ngFor="let list of listsService.lists" (click)="goToList()">{{list.name}}</ion-item>
+    <ion-item *ngFor="let list of listsService.lists" (click)="goToList(list)">{{list.name}}</ion-item>
   </ion-list>
 
 </ion-content>

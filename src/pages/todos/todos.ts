@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, ModalController, Platform } from 'ionic-angular';
 
+import {ListModel } from '../../shared/list-model';
 import { TodoModel } from '../../shared/todo-model'; 
 import { TodoService } from '../../shared/todo-service';
 import { AddTaskModalPage } from '../add-task-modal/add-task-modal';
@@ -18,6 +19,7 @@ import { AddTaskModalPage } from '../add-task-modal/add-task-modal';
 export class TodosPage {
 
   private toogleTodoTimeout = null;
+  private list:ListModel;
 
 
   constructor(
@@ -25,7 +27,10 @@ export class TodosPage {
     public navParams: NavParams, 
     public modalCtrl: ModalController,
     public todoService: TodoService,
-    public platform: Platform) {}
+    public platform: Platform) {
+      this.list = this.navParams.get('list');
+      this.todoService.loadFromList(this.list.id);
+    }
 
   ionViewDidLoad() {}
 

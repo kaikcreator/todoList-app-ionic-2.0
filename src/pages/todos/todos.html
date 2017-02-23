@@ -14,8 +14,13 @@
 
 
 <ion-content padding>
-  <h3>My List</h3>
+  <h3>{{list.name}}</h3>
   <ion-list>
+
+    <ion-item class="no-todos" *ngIf="!todoService.todos || todoService.todos.length == 0">
+      Add some tasks to your list
+    </ion-item>
+
     <ion-item-sliding *ngFor="let todo of todoService.todos | prioritizedTodosPipe">
 
       <ion-item [ngStyle]="setTodoStyles(todo)">
