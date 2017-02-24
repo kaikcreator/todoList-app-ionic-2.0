@@ -34,6 +34,10 @@ export class TodosPage {
 
   ionViewDidLoad() {}
 
+  ionViewWillUnload(){
+    this.todoService.saveLocally(this.list.id);
+  }
+
   setTodoStyles(item:TodoModel){
     let styles = {
       'text-decoration': item.isDone ? 'line-through' : 'none',

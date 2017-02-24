@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
+import { Storage } from '@ionic/storage';
 
 import { TodoModel } from './todo-model';
 
@@ -12,23 +13,38 @@ import { TodoModel } from './todo-model';
 @Injectable()
 export class TodoService {
 
-  private todos: TodoModel[];
+  private todos: TodoModel[] = [];
 
-  constructor(public http: Http) {
+  constructor(public http: Http, public local:Storage) {
 
   }
 
   public loadFromList(id:number){
-    if(id < 3){
-      this.todos = [
-        new TodoModel("this is an element", true),
-        new TodoModel("this is an element"),
-        new TodoModel("this is an element", false, true),
-      ];
-    }else{
-      this.todos = [];
-    }
+    this.getFromLocal(id);
+  }
 
+  private getFromLocal(id:number){
+    this.local.ready().then(()=>{
+      this.local.get(`list/${id}`).then(
+        data => {
+          if(!data){
+            this.todos = [];
+            return;
+          }
+          let localTodos:TodoModel[] =[];
+          for(let todo of data){
+            localTodos.push(new TodoModel(todo.description, todo.isImportant, todo.isDone));
+          }
+          this.todos = localTodos;
+        }
+      )
+    })
+  }
+
+  public saveLocally(id:number){
+    this.local.ready().then(()=>{
+      this.local.set(`list/${id}`, this.todos);
+    })
   }
 
   toogleTodo(todo:TodoModel){
