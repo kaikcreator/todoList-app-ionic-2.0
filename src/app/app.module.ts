@@ -1,5 +1,6 @@
 import { NgModule, ErrorHandler } from '@angular/core';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
+import { Storage } from '@ionic/storage';
 import { MyApp } from './app.component';
 import { TodosPage } from '../pages/todos/todos';
 import { ListsPage } from '../pages/lists/lists';
@@ -31,7 +32,8 @@ import { DoneTodosPipe } from '../pipes/done-todos-pipe';
   providers: [
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     TodoService,
-    ListsService
+    ListsService,
+    Storage
     ]
 })
 export class AppModule {}
