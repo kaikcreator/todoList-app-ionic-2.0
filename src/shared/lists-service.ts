@@ -4,6 +4,7 @@ import { Storage } from '@ionic/storage';
 import 'rxjs/add/operator/map';
 
 import { ListModel } from './list-model';
+import { AppSettings } from '../shared/app-settings';
 
 /*
   Generated class for the ListsService provider.
@@ -49,7 +50,7 @@ export class ListsService {
   }
 
   private getFromServer(){
-    this.http.get('http://localhost:3000/lists')
+    this.http.get(`${AppSettings.API_ENDPOINT}/lists`)
       .map(response => {return response.json()})
       .map((lists:Object[]) => {
         return lists.map(item => ListModel.fromJson(item));
