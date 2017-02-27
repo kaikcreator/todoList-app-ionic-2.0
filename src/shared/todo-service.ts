@@ -24,7 +24,7 @@ export class TodoService {
   }
 
   private getFromLocal(id:number){
-    this.local.ready().then(()=>{
+    return this.local.ready().then(()=>{
       this.local.get(`list/${id}`).then(
         data => {
           if(!data){

@@ -21,7 +21,10 @@ export class ListsService {
   }
 
   private getLists(){
-    this.getFromLocal();
+    this.getFromLocal()
+    .then(()=>{this.getFromServer()},
+        ()=>{this.getFromServer()}
+    )
   }
 
   public addList(name:string){
@@ -31,7 +34,7 @@ export class ListsService {
   }
 
   public getFromLocal(){
-    this.local.ready().then(()=>{
+    return this.local.ready().then(()=>{
       this.local.get('lists').then(
         data =>{
           let localLists:ListModel[] = [];
@@ -43,6 +46,23 @@ export class ListsService {
           this.lists = localLists;
         })
     })
+  }
+
+  private getFromServer(){
+    this.http.get('http://localhost:3000/lists')
+      .map(response => {return response.json()})
+      .map((lists:Object[]) => {
+        return lists.map(item => ListModel.fromJson(item));
+      })
+      .subscribe(
+        (result:ListModel[]) =>{
+          this.lists = result;
+          this.saveLocally();
+        },
+        error =>{
+          console.log("Error loading lists from server", error);
+        }
+      )
   }
 
   public saveLocally(){
