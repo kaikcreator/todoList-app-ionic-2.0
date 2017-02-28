@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import { Storage } from '@ionic/storage';
 import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/share';
 import {Observable} from 'rxjs/Rx';
 import { ListModel } from './list-model';
 import { AppSettings } from '../shared/app-settings';
@@ -76,6 +77,7 @@ export class ListsService {
 
   private postNewListToServer(name): Observable<ListModel>{
     let observable =  this.http.post(`${AppSettings.API_ENDPOINT}/lists`, {name})
+                      .share()
                       .map(response => response.json())
                       .map(list => ListModel.fromJson(list));
 

@@ -31,7 +31,7 @@ export class ListsPage {
     let loader = this.loadingCtrl.create();
     loader.present();
 
-    let list = this.listsService.addList(name)
+    this.listsService.addList(name)
     .subscribe(list =>{
       this.goToList(list);
       loader.dismiss();
