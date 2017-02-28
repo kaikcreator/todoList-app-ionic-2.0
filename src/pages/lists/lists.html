@@ -7,6 +7,11 @@
 <ion-header>
 
   <ion-navbar color="primary">
+    <ion-buttons end *ngIf="selectedList != null">
+      <button ion-button (click)="removeSelectedList()">
+        <ion-icon name="trash"></ion-icon>
+      </button>
+    </ion-buttons>
     <ion-title>My Lists</ion-title>
   </ion-navbar>
 
@@ -15,7 +20,10 @@
 
 <ion-content padding>
   <ion-list>
-    <ion-item *ngFor="let list of listsService.lists" (click)="goToList(list)">{{list.name}}</ion-item>
+    <ion-item *ngFor="let list of listsService.lists" (tap)="goToList(list)"
+    (press)="selectList(list)" [ngClass]="{'selected-list': selectedList === list}">
+      {{list.name}}
+    </ion-item>
   </ion-list>
 
 </ion-content>

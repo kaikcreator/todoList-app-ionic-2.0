@@ -17,6 +17,7 @@ import { ListModel } from '../../shared/list-model';
 })
 export class ListsPage {
 
+  public selectedList:ListModel = null;
   constructor(public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController, public listsService:ListsService, private loadingCtrl:LoadingController) {}
 
   ionViewDidLoad() {
@@ -24,6 +25,7 @@ export class ListsPage {
   }
 
   goToList(list:ListModel){
+    this.clearSelectedList();
     this.navCtrl.push(TodosPage, {list});
   }
 
@@ -67,6 +69,24 @@ export class ListsPage {
 
     addListAlert.present();
     
+  }
+
+  clearSelectedList(){
+    this.selectedList = null;
+  }
+
+  selectList(list:ListModel){
+    if(this.selectedList == list){
+      this.clearSelectedList();
+    }
+    else{
+      this.selectedList = list;
+    }
+  }
+
+  removeSelectedList(){
+    console.log("this list should be removed");
+    this.selectedList = null;
   }
 
 }
