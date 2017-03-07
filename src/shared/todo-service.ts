@@ -48,9 +48,9 @@ export class TodoService {
   }
 
   toogleTodo(todo:TodoModel){
-    let isDone = !todo.isDone;
     const todoIndex = this.todos.indexOf(todo);
-    let updatedTodo = new TodoModel(todo.description, todo.isImportant, isDone);
+    let updatedTodo = TodoModel.clone(todo);
+    updatedTodo.isDone = ! todo.isDone;
 
     this.todos = [
       ...this.todos.slice(0,todoIndex),
