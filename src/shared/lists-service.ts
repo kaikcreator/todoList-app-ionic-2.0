@@ -45,7 +45,7 @@ export class ListsService {
 
   public getFromLocal(){
     return this.local.ready().then(()=>{
-      this.local.get('lists').then(
+      return this.local.get('lists').then(
         data =>{
           let localLists:ListModel[] = [];
           if(data){

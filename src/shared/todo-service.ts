@@ -3,6 +3,7 @@ import { Http } from '@angular/http';
 import { Storage } from '@ionic/storage';
 
 import { TodoModel } from './todo-model';
+import { AppSettings } from './app-settings';
 
 /*
   Generated class for the TodoService provider.
@@ -20,12 +21,14 @@ export class TodoService {
   }
 
   public loadFromList(id:number){
-    this.getFromLocal(id);
+    this.getFromLocal(id).then(()=>{
+      this.loadFromServer(id);
+    })
   }
 
   private getFromLocal(id:number){
     return this.local.ready().then(()=>{
-      this.local.get(`list/${id}`).then(
+      return this.local.get(`list/${id}`).then(
         data => {
           if(!data){
             this.todos = [];
@@ -33,12 +36,31 @@ export class TodoService {
           }
           let localTodos:TodoModel[] =[];
           for(let todo of data){
-            localTodos.push(new TodoModel(todo.description, todo.isImportant, todo.isDone));
+            localTodos.push(TodoModel.clone(todo));
           }
           this.todos = localTodos;
         }
       )
     })
+  }
+
+  private loadFromServer(id:number){
+    this.http.get(`${AppSettings.API_ENDPOINT}/lists/${id}/todos`)
+      .map(response => {
+        return response.json();
+      })
+      .map((todos:Object[]) =>{
+        return todos.map(item => TodoModel.fromJson(item));
+      })
+      .subscribe(
+        (result: TodoModel[]) =>{
+          this.todos = result;
+          this.saveLocally(id);
+        },
+        error => {
+          console.log("Error loading lists from server ", error);
+        }
+      )
   }
 
   public saveLocally(id:number){
