@@ -4,6 +4,9 @@ import { Storage } from '@ionic/storage';
 
 import { TodoModel } from './todo-model';
 import { AppSettings } from './app-settings';
+import { Observable } from "rxjs/Rx";
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/share';
 
 /*
   Generated class for the TodoService provider.
@@ -63,6 +66,20 @@ export class TodoService {
       )
   }
 
+  private postNewTodoToServer(todo:TodoModel): Observable<TodoModel>{
+    let observable = this.http.post(`${AppSettings.API_ENDPOINT}/lists/${todo.listId}/todos`,
+    {
+      description: todo.description,
+      isImportant: todo.isImportant,
+      isDone: todo.isDone
+    })
+    .map(response => response.json())
+    .map(todo => TodoModel.fromJson(todo))
+    .share();
+
+    return observable;
+  }
+
   public saveLocally(id:number){
     this.local.ready().then(()=>{
       this.local.set(`list/${id}`, this.todos);
@@ -97,7 +114,17 @@ export class TodoService {
   }
 
   addTodo(todo:TodoModel){
-    this.todos = [...this.todos, todo];
+    let observable = this.postNewTodoToServer(todo);
+
+    observable.subscribe(
+      (todo:TodoModel) => {
+        this.todos = [...this.todos, todo];
+        this.saveLocally(todo.listId);
+      },
+      error => console.log("Error trying to post a new list")
+    );
+
+    return observable;
   }  
 
 }

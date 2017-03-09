@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, ModalController, Platform } from 'ionic-angular';
+import { NavController, NavParams, ModalController, Platform, LoadingController } from 'ionic-angular';
 
 import {ListModel } from '../../shared/list-model';
 import { TodoModel } from '../../shared/todo-model'; 
@@ -27,7 +27,8 @@ export class TodosPage {
     public navParams: NavParams, 
     public modalCtrl: ModalController,
     public todoService: TodoService,
-    public platform: Platform) {
+    public platform: Platform, 
+    private loadingCtrl: LoadingController) {
       this.list = this.navParams.get('list');
       this.todoService.loadFromList(this.list.id);
     }
@@ -59,13 +60,20 @@ export class TodosPage {
     this.todoService.removeTodo(todo);
   }
 
+  addTodo(todo:TodoModel){
+    let loader = this.loadingCtrl.create();
+    loader.present();
+    this.todoService.addTodo(todo)
+    .subscribe(()=>loader.dismiss(), ()=>loader.dismiss());
+  }
+
   showAddTodo(){
     let modal = this.modalCtrl.create(AddTaskModalPage, {listId: this.list.id});
     modal.present();
 
     modal.onDidDismiss(data => {
       if(data){
-        this.todoService.addTodo(data);
+        this.addTodo(data);
       }
     });
   }
