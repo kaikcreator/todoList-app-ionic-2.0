@@ -67,6 +67,13 @@ export class TodosPage {
     .subscribe(()=>loader.dismiss(), ()=>loader.dismiss());
   }
 
+  updateTodo(originalTodo:TodoModel, modifiedTodo:TodoModel){
+    let loader = this.loadingCtrl.create();
+    loader.present();
+    this.todoService.updateTodo(originalTodo, modifiedTodo)
+    .subscribe(()=>loader.dismiss(), () =>loader.dismiss());
+  }  
+
   showAddTodo(){
     let modal = this.modalCtrl.create(AddTaskModalPage, {listId: this.list.id});
     modal.present();
@@ -84,7 +91,7 @@ export class TodosPage {
 
     modal.onDidDismiss(data=>{
       if(data){
-        this.todoService.updateTodo(todo, data);
+        this.updateTodo(todo, data);
       }
     })
   }
