@@ -106,7 +106,10 @@ export class TodoService {
     let updatedTodo = TodoModel.clone(todo);
     updatedTodo.isDone = ! todo.isDone;
 
-    return this.updateTodo(todo, updatedTodo);
+    return this.updateTodo(todo, updatedTodo).subscribe(
+      ()=>{},
+      ()=>{this.loadFromList(todo.listId)}
+    )
   }
 
   removeTodo(todo:TodoModel){
