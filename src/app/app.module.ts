@@ -1,6 +1,6 @@
 import { NgModule, ErrorHandler } from '@angular/core';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
-import { Storage } from '@ionic/storage';
+import { IonicStorageModule } from '@ionic/storage';
 import { MyApp } from './app.component';
 import { TodosPage } from '../pages/todos/todos';
 import { ListsPage } from '../pages/lists/lists';
@@ -20,7 +20,8 @@ import { DoneTodosPipe } from '../pipes/done-todos-pipe';
     DoneTodosPipe
   ],
   imports: [
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp),
+    IonicStorageModule.forRoot()
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -32,8 +33,7 @@ import { DoneTodosPipe } from '../pipes/done-todos-pipe';
   providers: [
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     TodoService,
-    ListsService,
-    Storage
+    ListsService
     ]
 })
 export class AppModule {}
