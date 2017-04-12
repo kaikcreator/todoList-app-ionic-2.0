@@ -40,6 +40,11 @@ page-add-task-modal {
                     transition-delay: 0.3s;
                 }
             }
+
+            //prevents grey background in the X icon that allows to remove the input
+            button.text-input-clear-icon {
+                background-color: transparent;
+            }
         }
     }
 
