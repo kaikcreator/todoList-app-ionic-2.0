@@ -31,14 +31,14 @@ export class ListsPage {
 
   addNewList(name:string){
     let loader = this.loadingCtrl.create();
-    loader.present();
-
-    this.listsService.addList(name)
-    .subscribe(list =>{
-      this.goToList(list);
-      loader.dismiss();
-    }, error => loader.dismiss());
-
+    loader.present().then(()=>{
+      this.listsService.addList(name)
+      .then(item =>{
+        let list = ListModel.fromJson(item);
+        this.goToList(list);
+        loader.dismiss();
+      }, error => loader.dismiss());
+    });
   }
 
   showAddList(){

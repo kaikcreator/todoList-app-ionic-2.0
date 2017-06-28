@@ -19,7 +19,7 @@ import { AddTaskModalPage } from '../add-task-modal/add-task-modal';
 export class TodosPage {
 
   private toogleTodoTimeout = null;
-  private list:ListModel;
+  public list:ListModel;
 
 
   constructor(
@@ -36,7 +36,6 @@ export class TodosPage {
   ionViewDidLoad() {}
 
   ionViewWillUnload(){
-    this.todoService.saveLocally(this.list.id);
   }
 
   setTodoStyles(item:TodoModel){
@@ -64,14 +63,15 @@ export class TodosPage {
     let loader = this.loadingCtrl.create();
     loader.present();
     this.todoService.addTodo(todo)
-    .subscribe(()=>loader.dismiss(), ()=>loader.dismiss());
+    .then(()=>loader.dismiss())
+    .catch(()=>loader.dismiss());
   }
 
   updateTodo(originalTodo:TodoModel, modifiedTodo:TodoModel){
     let loader = this.loadingCtrl.create();
     loader.present();
     this.todoService.updateTodo(originalTodo, modifiedTodo)
-    .subscribe(()=>loader.dismiss(), () =>loader.dismiss());
+    .then(()=>loader.dismiss(), () =>loader.dismiss());
   }  
 
   showAddTodo(){
