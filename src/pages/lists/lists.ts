@@ -62,6 +62,7 @@ export class ListsPage {
           handler: data => {
             let navTransition = addListAlert.dismiss();
             navTransition.then(()=>{this.addNewList(data.name)});
+            return false;
           }
         }
       ]
